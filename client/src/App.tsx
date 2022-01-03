@@ -52,7 +52,7 @@ function App() {
     (() => {
       chatReq.setId(user.id);
       const chatStream = client.chatStream(chatReq);
-      chatStream.on("data", (chunk) => {
+      chatStream.on("data", (chunk: StreamMessage) => {
         const msg = (chunk as StreamMessage).toObject();
         console.log(msg);
         setMessages((prev) => [...prev, msg]);
@@ -61,7 +61,7 @@ function App() {
 
     (() => {
       const userListStream = client.userStream(chatReq);
-      userListStream.on("data", (chunk) => {
+      userListStream.on("data", (chunk: UserStreamResponse) => {
         const { usersList } = (chunk as UserStreamResponse).toObject();
         console.log(usersList);
         setUserList(usersList);
